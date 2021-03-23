@@ -1,13 +1,13 @@
 <?php 
 //GESTION DE LA BASE -----------------------
-$BDD = null;
+$mabase = null;
 $access = null;
 $errorMessage="";
 try{
             $user = "lapro_site";
             $pass = "TDataSource1234";
 
-            $BDD = new PDO("mysql:host=mysql-xencev.alwaysdata.net; dbname=xencev_virus; charset=utf8", "xencev_root", "2001root2001");
+            $mabase = new PDO('mysql:host=mysql-lapro.alwaysdata.net;dbname=lapro_virus', $user, $pass);
             
 
 }catch(Exception $e){
@@ -15,7 +15,7 @@ try{
 }
 
 //GESTION DES SESSION -----------------------
-if(!is_null($BDD)){
+if(!is_null($mabase)){
     if (isset($_SESSION["Connected"]) && $_SESSION["Connected"]===true){
         $access = true;
         $access = afficheFormulaireLogout();
@@ -34,7 +34,7 @@ function afficheFormulaireLogout(){
     //traitement du formulaire
     $afficheForm = true;
     $access = true;
-    if( isset($_POST["deco"]) && isset($_POST["deco"])){
+    if( isset($_POST["logout"]) && isset($_POST["logout"])){
         //si on se deco on raffiche le formulaire de co
         $_SESSION["Connected"]=false;
         session_unset();
@@ -49,7 +49,9 @@ function afficheFormulaireLogout(){
     if($afficheForm){
     ?>
         <form action="" method="post" >
-                <input type="submit" value="Deconnection" name="deco">
+            <div >
+                <input type="submit" value="Deco!" name="logout">
+            </div>
         </form>
 
     <?php
@@ -66,24 +68,13 @@ function afficheFormulaireConnexion(){
     $access = false;
     if( isset($_POST["login"]) && isset($_POST["password"])){
         //verif mdp en BDD
-        $req = $BDD->prepare('SELECT * FROM `User` WHERE `Nom`= ? AND `Prenom`= ? AND `Mot_de_Passe`= ?');
-        $req->execute(array($_POST['Nom'],$_POST['Prenom'], $_POST['password']));
-        $resultat = $req->fetch();
 
-        if(!$resultat)
-        {
-            echo "mauvais mot de passe ou non d'utilisateur";
-        } else 
-        {
-            // echo "ca marche";
-
-            //si mdp = ok
-            $access = true;
-            $_SESSION["Connected"]=true;
-            $afficheForm = false;
-            //si on est co on affiche le formulaire de deco
-            afficheFormulaireLogout();
-        }
+        //si mdp = ok
+        $access = true;
+        $_SESSION["Connected"]=true;
+        $afficheForm = false;
+        //si on est co on affiche le formulaire de deco
+        afficheFormulaireLogout();
 
     }else{
         $afficheForm = true;
@@ -91,19 +82,18 @@ function afficheFormulaireConnexion(){
     
     if($afficheForm){
     ?>
-        <form method="post" >
-
-                <label for="login">Entrez votre Nom: </label>
-                <input type="text" name="Nom" id="Nom" required>
-
-                <label for="login">Entrez votre Prenom: </label>
-                <input type="text" name="Prenom" id="Prenom" required>
-
+        <form action="" method="post" >
+            <div>
+                <label for="login">Enter your login: </label>
+                <input type="text" name="login" id="login" required>
+            </div>
+            <div >
                 <label for="password">Enter your pass: </label>
                 <input type="password" name="password" id="password" required>
-
-                <input type="submit" name=submit value="Connecte-toi" >
-
+            </div>
+            <div >
+                <input type="submit" value="Go!" >
+            </div>
         </form>
 
     <?php
