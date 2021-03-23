@@ -1,3 +1,7 @@
+<?php
+    include "fonction.php";
+?>
+
 <html>
     <head>
     </head>
@@ -5,19 +9,22 @@
 
         <?php
             session_start();
+        if(!is_null($BDD))
+        {
+            echo "Connecté a la base";
+        } else 
+        {
+            echo "problème de connection a la base";
+        }
 
-            try
-            {
-                $BDD = new PDO("mysql:host=mysql-xencev.alwaysdata.net; dbname=xencev_virus; charset=utf8", "xencev_root", "2001root2001");
-            } catch(\Throwable $th) {
-                $BDD = null;
-            } 
         
         if($_SESSION && $_SESSION['Connect'] == 1)
         {
+            //Affichage 
+
             //echo "Tu es connecté";
             ?>
-
+            
             <img src="Titan_Charette.png">
             
             <form method=POST>
