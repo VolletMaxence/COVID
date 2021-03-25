@@ -12,21 +12,20 @@
         if($access)
         {
 
-            echo "<h1> Bienvenue ".$User->getPrenom()."".$User->getNom()."</h1>";
+            echo "<h1> Bienvenue ".$User->getPrenom()." ".$User->getNom()."</h1>";
             ?>
 
             <img src="Titan_Charette.png">
             <?php
 
-            $User = new Personnage($BDD);
-            $User->getPerso();
+            $Perso = new Personnage($BDD);
+            $Perso->getPerso();
             if(!$Perso->getID()==0)
             {
-                echo "test";
-                $Perso->setPerso($Perso);
+                $User->setPerso($Perso);
             }
 
-            echo '<a href="combat.php"> Combat avec '.$Perso->getNom().'</a>';
+            echo '<a href="combat.php"> Tu combattras avec '.$Perso->getNom().'</a>';
 
         } else 
         {

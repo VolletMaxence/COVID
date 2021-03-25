@@ -130,9 +130,15 @@
 
         public function setPerso($Perso)
         {
+            echo "On utilise setPerso de la classe User ";
+
             $this->_Perso = $Perso;
 
-            $req = "UPDATE 'User' set IDPerso = '".$Perso->getID()."' WHERE ID = '".$this->_ID."'";
+            $IDPerso = $this->_Perso->getID();
+
+            $req = "UPDATE `User` SET `IDPerso` = $IDPerso WHERE `ID` = $this->_ID";
+
+            echo "<p>".$req." </p>";
             $result = $this->_BDD->query($req);
         }
 

@@ -15,7 +15,6 @@ try{
     $errorMessage .= $e->getMessage();
 }
 
-$Perso = new Personnage($BDD);
 $User = new User($BDD);
 
 //GESTION DES SESSION -----------------------

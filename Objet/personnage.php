@@ -2,9 +2,9 @@
     class Personnage{
         //propiétés
         private $_ID;
-        private $_nom;
-        private $_attack;
-        private $_vie;
+        private $_Nom;
+        private $_Attaque;
+        private $_Vie;
         private $_pdo;
         private $_sac;
 
@@ -17,14 +17,14 @@
         public function setPerso($ID, $Nom, $Vie, $Attaque)
         {
             $this->_ID = $ID;
-            $this->_nom = $Nom;
-            $this->_attack = $Attaque;
-            $this->_vie = $Vie;
+            $this->_Nom = $Nom;
+            $this->_Attaque = $Attaque;
+            $this->_Vie = $Vie;
         }
 
         public function getNom()
         {
-            return $this->_nom;
+            return $this->_Nom;
         }
 
         public function getSac()
@@ -49,7 +49,7 @@
     
         public function setPersobyID($ID)
         {
-            $req = "SELECT * FROM Personnage WHERE ID='".$ID."'";
+            $req = "SELECT * FROM Personnage WHERE ID=$ID";
             $result = $this->_BDD->query($req);
             if($tab = $result->fetch())
             {
@@ -69,7 +69,7 @@
                         <?php
                             while($tab = $result->fetch())
                                 {
-                                    echo '<option value="'.$tab[O].'">'.$tab[1].'</option>';
+                                    echo '<option value="'.$tab['ID'].'">'.$tab['Nom'].'</option>';
                                 }
                         ?>
                     </select>
