@@ -5,6 +5,8 @@
         private $_Nom;
         private $_Prenom;
         private $_MDP;
+        private $_Perso;
+
         private $_BDD;
 
         public function __construct($BDD)
@@ -100,5 +102,40 @@
 
             return $access;
             }
+        
+        public function getPrenom()
+        {
+            return $this->_Prenom;
         }
-?>
+
+        public function getNom()
+        {
+            return $this->_Nom;
+        }
+
+        public function setUserbyID($ID)
+        {
+            $req = "SELECT * FROM `User` WHERE ID='".$ID."'";
+            $result = $this->_BDD->query($req);
+
+            if ($tab = $result->fetch())
+            {
+                $this->setUser($tab['ID'], $tab['Nom'], $tab['Prenom'], $tab['Mot_de_Passe'], $tab['IDPerso']);
+                
+                $Perso = new Personnage($this->_BDD);
+                $Perso->setPersobyID($tab["IDPerso"]);
+                $this->_Perso = $Perso;
+            }
+        }
+
+        public function setPerso($Perso)
+        {
+            $this->_Perso = $Perso;
+
+            $req = "UPDATE 'User' set IDPerso = '".$Perso->getID()."' WHERE ID = '".$this->_ID."'";
+            $result = $this->_BDD->query($req);
+        }
+
+        
+    }
+    ?>
