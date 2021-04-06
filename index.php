@@ -11,7 +11,6 @@
         <?php
         if($access)
         {
-
             echo "<h1> Bienvenue ".$User->getPrenom()." ".$User->getNom()."</h1>";
             ?>
 

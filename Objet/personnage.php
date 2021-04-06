@@ -1,12 +1,12 @@
 <?php
     class Personnage{
         //propiétés
-        private $_ID;
-        private $_Nom;
-        private $_Attaque;
-        private $_Vie;
-        private $_pdo;
-        private $_sac;
+        protected $_ID;
+        protected $_Nom;
+        protected $_Attaque;
+        protected $_Vie;
+        protected $_pdo;
+        protected $_sac;
 
         //méthode
         public function __construct($BDD)
@@ -26,6 +26,12 @@
         {
             return $this->_Nom;
         }
+
+        public function getVie()
+        {
+            return $this->_Vie;
+        }
+
 
         public function getSac()
         {
@@ -80,6 +86,16 @@
                 $this->setPersobyID($_POST["selectPerso"]);
             }
 
+        }
+
+        public function Attaque()
+        {
+            $this->_Attaque;
+        }
+
+        public function sefaitAttaquer($degats)
+        {
+            $this->_Vie = $this->_Vie - $degats;
         }
 
     }

@@ -1,7 +1,9 @@
 ﻿<?php
     require ("Objet/arme.php");
     require ("Objet/personnage.php");
-    require ("Objet/User")
+    require ("Objet/mage.php");
+    require ("Objet/Guerrier.php");
+    require ("Objet/User.php");
 ?>
 
 <?php
@@ -32,6 +34,40 @@
         <h1>COMBAT MORTEL WISH</h1>
 
         <?php
+
+        $Mage = new Mage($bdd);
+        $Guerrier = new Guerrier($bdd);
+
+        $Guerrier->setGuerrier(1);
+        $Mage->setMage(1);
+
+        echo "<h2> Présentation des persos : </h2>";
+        echo "<p>";
+        echo "Je suis le ".$Mage->classe()." nommé ".$Mage->getNom().", j'ai ".$Mage->getAP()." point de dégats magique et j'ai ".$Mage->getVie()." PV";
+        echo "</p>";
+
+
+        echo "<p>";
+        echo "Je suis le ".$Guerrier->classe()." nommé ".$Guerrier->getNom().", j'ai ".$Guerrier->getBrut()." point de dégats Brut et j'ai ".$Guerrier->getVie()." PV";
+        echo "</p>";
+
+
+        echo "<h2> Les persos s'attaquent entre eux : </h2>";
+        echo "<p>";
+        $Mage->attaqueMagique($Guerrier);
+        echo "</p> <p>";
+        $Guerrier->attaqueBrut($Mage);
+        echo "</p>";
+
+        echo "<h2> Présentation des persos après s'être attaquer : </h2>";
+        echo "<p>";
+        echo "Je suis le ".$Mage->classe()." nommé ".$Mage->getNom()." et j'ai ".$Mage->getVie()." PV";
+        echo "</p> <p>";
+        echo "Je suis le ".$Guerrier->classe()." nommé ".$Guerrier->getNom()." et j'ai ".$Guerrier->getVie()." PV";
+        echo "</p>";
+
+
+
     } else{
         echo 'Base non connectée';
     }

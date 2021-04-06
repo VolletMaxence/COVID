@@ -130,7 +130,7 @@
 
         public function setPerso($Perso)
         {
-            echo "On utilise setPerso de la classe User ";
+            //echo "On utilise setPerso de la classe User ";
 
             $this->_Perso = $Perso;
 
@@ -138,10 +138,8 @@
 
             $req = "UPDATE `User` SET `IDPerso` = $IDPerso WHERE `ID` = $this->_ID";
 
-            echo "<p>".$req." </p>";
+            //echo "<p>".$req." </p>";
             $result = $this->_BDD->query($req);
         }
-
-        
     }
     ?>
